@@ -13,22 +13,22 @@ const Navmenu = () => {
       className="navmenu"
     >
       <Container>
-        <Navbar.Brand as={Link} to="/" class="mx-auto">
+        <Navbar.Brand as={Link} to="/" className="mx-auto">
           <svg height="40px" viewBox="0 0 715 195">
             <title>Eva</title>
             <desc>Empowering you to own your health</desc>
             <g
               id="evatech.co"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             >
               <g
                 id="Eva Technologies"
                 transform="translate(-363.000000, -415.000000)"
                 fill="currentColor"
-                fill-rule="nonzero"
+                fillRule="nonzero"
               >
                 <g id="Eva" transform="translate(363.000000, 414.000000)">
                   <path
