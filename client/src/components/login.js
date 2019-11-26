@@ -4,6 +4,17 @@ import { navigate } from "gatsby"
 import { Container, Form, Button, Row, Col, Spinner } from "react-bootstrap"
 import axios from "axios"
 
+/**
+ * Login component using api on localhost:3000
+ * Contains two text inputs for username and password.
+ * On successful login redirects to reports view using gatsby API, sending pertinent data.
+ * @component
+ * @example
+ * return (
+ *  <LoginForm />
+ * )
+ */
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)

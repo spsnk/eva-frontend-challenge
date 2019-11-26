@@ -1,9 +1,36 @@
 import React from "react"
-import Cleave from "cleave.js/react"
 import { Card, Accordion } from "react-bootstrap"
-import axios from "axios"
+import PropTypes from "prop-types"
+
+/**
+ * Component that returns react code corresponding to a report
+ * @component
+ * @example
+ * datetime = "2019-10-13T02:21:14.321Z"
+ * result = 'Asymmetric'
+ * id = 0
+ * return (
+ *  <Result
+ *       datetime={datetime}
+ *       result={result}
+ *       id={id} />
+ * )
+ * @prop {PropTypes.string} datetime Contains the datetime of the report. Processed to be shown on the user's locale.
+ * @prop {PropTypes.string} result Contains the result of the prop, can be either 'Asymmetric' or 'No asymmetric'
+ * @prop {PropTypes.number} id contains the id key related to the ordering of the reports.
+ */
 
 class Result extends React.Component {
+  static propTypes = {
+    datetime: PropTypes.string,
+    result: PropTypes.string,
+    id: PropTypes.number,
+  }
+  static defaultProps = {
+    datetime: new Date(),
+    result: [],
+    id: 0,
+  }
   render() {
     return (
       <Card className="element shadow">
