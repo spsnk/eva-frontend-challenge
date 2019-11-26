@@ -1,39 +1,23 @@
 import React from "react"
 import Cleave from "cleave.js/react"
-import {
-  Container,
-  Form,
-  Button,
-  Row,
-  Col,
-  Modal,
-  ProgressBar,
-  Overlay,
-  Popover,
-} from "react-bootstrap"
+import { navigate } from "gatsby"
+import { Container, Form, Button, Row, Col, Spinner } from "react-bootstrap"
 import axios from "axios"
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      fileprogress: 0,
-      loaded: false,
-      showModal: false,
-      validated: false,
-      showcatpchatip: false,
-      response: { message: "Uploading files..." },
+      loaded: true,
     }
     this.formref = React.createRef()
-    //this.captcha = React.createRef()
-    //require("cleave.js/dist/addons/cleave-phone.id")
   }
 
   handleSubmit(e) {
     e.preventDefault()
     this.setState({
-      showModal: true,
-      validated: false,
+      loaded: false,
+      success: false,
     })
     const data = new FormData(e.target)
     var data_j = {}
@@ -49,45 +33,66 @@ class LoginForm extends React.Component {
       .then(res => {
         this.formref.reset()
         this.setState({
-          fileprogress: 100,
           loaded: true,
-          response: res.data,
+          error: false,
+          success: true,
         })
-        console.log(res.data)
+        navigate("/reports/", { state: res.data })
       })
       .catch(error => {
-        if (error.response) {
-          this.setState({
-            error,
-            response: error.response.data,
-            loaded: true,
-            fileprogress: 0,
-          })
-        } else {
-          this.setState({
-            error,
-            response: { message: "Error: " + error.message },
-            loaded: true,
-            fileprogress: 0,
-          })
-        }
+        this.setState({
+          error,
+          loaded: true,
+          success: false,
+        })
       })
   }
 
   render() {
     return (
-      <Container>
+      <Container style={{ position: "relative" }}>
+        {!this.state.loaded || this.state.success ? (
+          <Container
+            fluid
+            className="h-100"
+            style={{
+              backgroundColor: "rgba(255, 191, 195, 0.85)",
+              position: "absolute",
+              zIndex: "10",
+            }}
+          >
+            <div className="d-flex flex-column" style={{ marginTop: "50px" }}>
+              <Spinner
+                animation="grow"
+                variant="secondary"
+                className="mx-auto m-3 d-block"
+              />
+              {!this.state.success ? (
+                <div className="mx-auto">Checking your credentials...</div>
+              ) : (
+                <div className="mx-auto">Getting your reports...</div>
+              )}
+            </div>
+          </Container>
+        ) : null}
         <Form
           onSubmit={this.handleSubmit.bind(this)}
           ref={el => (this.formref = el)}
-          className="mb-5 mx-auto"
+          className="mb-5 mx-auto d-flex flex-column"
           style={{ maxWidth: "600px" }}
         >
-          <Form.Text>Login Information:</Form.Text>
+          {this.state.error ? (
+            <Form.Text className="text-danger ">
+              Username/Password combination not found. <br />
+              <strong>Please review your credentials:</strong>
+            </Form.Text>
+          ) : (
+            <Form.Text>Enter your login Information:</Form.Text>
+          )}
           <Form.Group controlId="username">
             <Row>
               <Form.Label column sm={2}>
-                E-mail
+                E-mail:
               </Form.Label>
               <Col>
                 <Form.Control
@@ -104,7 +109,7 @@ class LoginForm extends React.Component {
           <Form.Group controlId="password">
             <Row>
               <Form.Label column sm={2}>
-                Password
+                Password:
               </Form.Label>
               <Col>
                 <Form.Control
@@ -117,16 +122,9 @@ class LoginForm extends React.Component {
               </Col>
             </Row>
           </Form.Group>
-
-          <Form.Group>
-            <Row className="justify-content-md-center">
-              <Col>
-                <Button variant="light" type="submit">
-                  Login
-                </Button>
-              </Col>
-            </Row>
-          </Form.Group>
+          <Button variant="light" type="submit" className="ml-auto">
+            Login
+          </Button>
         </Form>
       </Container>
     )
