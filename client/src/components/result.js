@@ -34,9 +34,12 @@ class Result extends React.Component {
   render() {
     return (
       <Card className="element shadow">
-        <Accordion.Toggle as={Card.Header} style={{cursor:"pointer"}} eventKey={this.props.id}>
-          Report date:{" "}
-          <b>{new Date(this.props.datetime).toLocaleString()}</b>
+        <Accordion.Toggle
+          as={Card.Header}
+          style={{ cursor: "pointer" }}
+          eventKey={this.props.id}
+        >
+          Report date: <b>{new Date(this.props.datetime).toLocaleString()}</b>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={this.props.id}>
           <Card.Body>
@@ -46,9 +49,9 @@ class Result extends React.Component {
             <Card.Text>
               What this means? <br />
               <span>
-              {this.props.result == "Asymmetric"
-                ? "There is a discrepancy on the density of your tissue, this is normal in most cases and we need more information to give you an accurate result. Please schedule a follow-up exploration at any of our clinics."
-                : "Everything looks normal. Don't forget to check regularly at our clinics."}
+                {this.props.result == "Asymmetric"
+                  ? "There is a discrepancy in the density of your tissue. This is normal in most cases and we need more information to give you an accurate result. Please schedule a follow-up exploration at any of our clinics."
+                  : "Everything looks normal. Don't forget to check regularly at our clinics."}
               </span>
             </Card.Text>
           </Card.Body>
