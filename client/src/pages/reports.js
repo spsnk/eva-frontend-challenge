@@ -30,28 +30,37 @@ class Reports extends React.Component {
     console.log()
     return (
       <Layout>
-        <Container>
+        <Container fluid className="px-0">
           {!this.state.logged_in ? (
             <Container className="mx-auto my-3 d-flex flex-column">
-            <p className="mx-auto my-5 "> <strong>You are not logged in.</strong> </p> 
-              <p className="mx-auto"> To continue click here: </p> 
-              <div className="mx-auto "><Button as={Link} variant="light" to="/">Login here</Button></div>
+              <p className="mx-auto my-5 ">
+                <strong>You are not logged in.</strong>
+              </p>
+              <p className="mx-auto"> To continue click here: </p>
+              <div className="mx-auto ">
+                <Button as={Link} variant="light" to="/">
+                  Login here
+                </Button>
+              </div>
             </Container>
           ) : (
             <>
-            <Container className="d-flex flex-column mt-3">
-              <p className="mx-auto">Here is the list of all your reports we have on file. To view the results of each report click on its date.</p>
-            </Container>
-            <Accordion>
-              {reports.map((report, key) => (
-                <Result
-                  datetime={report.datetime}
-                  result={report.result}
-                  id={key}
-                  key={key}
-                />
-              ))}
-            </Accordion>
+              <Container className="d-flex flex-column mt-3">
+                <p className="mx-auto">
+                  Here is the list of all your reports we have on file. To view
+                  the results of each report click on its date.
+                </p>
+              </Container>
+              <Accordion>
+                {reports.map((report, key) => (
+                  <Result
+                    datetime={report.datetime}
+                    result={report.result}
+                    id={key}
+                    key={key}
+                  />
+                ))}
+              </Accordion>
             </>
           )}
         </Container>

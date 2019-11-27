@@ -23,7 +23,9 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <Container as="main">{children}</Container>
+        <Container fluid as="main">
+          {children}
+        </Container>
       </div>
     </>
   )
