@@ -1,0 +1,20 @@
+ErrorDocument 404 /404/
+
+RedirectMatch 404 /\.git
+
+<ifModule mod_headers.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 day"
+    <filesMatch ".(html)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </filesMatch>
+    <filesMatch ".(js|css)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </filesMatch>
+    <If "%{REQUEST_URI} =~ m#^\/page-data\/.*#">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </If>
+    <If "%{REQUEST_URI} =~ m#^\/static\/.*#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+</ifModule>
