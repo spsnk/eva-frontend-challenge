@@ -18,8 +18,8 @@ Simple HTML documentation generated with JSDoc is provided through `./client/doc
 
 ### Building/Serving
 
-The client source code can be built and served with the command `./client$ yarn build && yarn serve`.
+The client source code can be built and served with the command `./client$ yarn && yarn build && yarn serve`.
 
 ### Tests
 
-Tests can be run with command `./client$ yarn test`.
+Tests can be run with command `./client$ yarn && yarn test`.
