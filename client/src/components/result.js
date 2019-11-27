@@ -34,9 +34,9 @@ class Result extends React.Component {
   render() {
     return (
       <Card className="element shadow">
-        <Accordion.Toggle as={Card.Header} eventKey={this.props.id}>
+        <Accordion.Toggle as={Card.Header} style={{cursor:"pointer"}} eventKey={this.props.id}>
           Report date:{" "}
-          <b>{new Date(this.props.datetime).toLocaleString("es-MX")}</b>
+          <b>{new Date(this.props.datetime).toLocaleString()}</b>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={this.props.id}>
           <Card.Body>

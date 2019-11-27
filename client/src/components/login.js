@@ -7,7 +7,7 @@ import axios from "axios"
 /**
  * Login component using api on localhost:3000
  * Contains two text inputs for username and password.
- * On successful login redirects to reports view using gatsby API, sending pertinent data.
+ * On successful login redirects to reports view using gatsby API, sending the response data.
  * @component
  * @example
  * return (

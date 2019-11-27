@@ -5,7 +5,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: result.js</title>
+    <title>JSDoc: pages/reports.js</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -46,7 +46,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="LoginForm.html">LoginForm</a></li><li><a href="Result.html">Result</a></li></ul></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="LoginForm.html">LoginForm</a></li><li><a href="Reports.html">Reports</a></li><li><a href="Result.html">Result</a></li></ul><h3>Global</h3><ul><li><a href="global.html#IndexPage">IndexPage</a></li></ul></div>
                     </nav>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
                         <p>Source</p>
-                        <h1>result.js</h1>
+                        <h1>pages/reports.js</h1>
                     </header>
                     
                     
@@ -65,63 +65,68 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react"
-import { Card, Accordion } from "react-bootstrap"
-import PropTypes from "prop-types"
+import { Link } from "gatsby"
+import { Container, Accordion, Button } from "react-bootstrap"
+import Layout from "../components/layout"
+import Result from "../components/result"
 
 /**
- * Component that returns react code corresponding to a report
+ * Reports view using a bootstrap accordion to display the list when the user has logged in.
+ * Displays a message indicating the user should login if they hasnt.
  * @component
- * @example
- * datetime = "2019-10-13T02:21:14.321Z"
- * result = 'Asymmetric'
- * id = 0
- * return (
- *  &lt;Result
- *       datetime={datetime}
- *       result={result}
- *       id={id} />
- * )
- * @prop {PropTypes.string} datetime Contains the datetime of the report. Processed to be shown on the user's locale.
- * @prop {PropTypes.string} result Contains the result of the prop, can be either 'Asymmetric' or 'No asymmetric'
- * @prop {PropTypes.number} id contains the id key related to the ordering of the reports.
+ * @prop {Object} location.state.data Received prop from gatsby Navigation page, should contain property reports
+ * @prop {Array} location.state.data.reports Array of reports, its sorted by date upon update and used to render the &lt;Result /> component.
  */
 
-class Result extends React.Component {
-  static propTypes = {
-    datetime: PropTypes.string,
-    result: PropTypes.string,
-    id: PropTypes.number,
-  }
-  static defaultProps = {
-    datetime: new Date(),
-    result: [],
-    id: 0,
+class Reports extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      logged_in: this.props.location.state ? true : false,
+    }
   }
   render() {
+    let reports
+    if (this.state.logged_in) {
+      reports = this.props.location.state.data.reports
+      reports.sort((a, b) => (a.datetime > b.datetime ? -1 : 1))
+    } else {
+      reports = []
+    }
+    console.log()
     return (
-      &lt;Card className="element shadow">
-        &lt;Accordion.Toggle as={Card.Header} eventKey={this.props.id}>
-          Report date:{" "}
-          &lt;b>{new Date(this.props.datetime).toLocaleString()}&lt;/b>
-        &lt;/Accordion.Toggle>
-        &lt;Accordion.Collapse eventKey={this.props.id}>
-          &lt;Card.Body>
-            &lt;Card.Text>
-              Result: &lt;strong>{this.props.result}&lt;/strong>
-            &lt;/Card.Text>
-            &lt;Card.Text>
-              What this means? &lt;br />
-              {this.props.result == "Asymmetric"
-                ? "There is a discrepancy on the density of your tissue, this is normal in most cases and we need more information to give you an accurate result. Please schedule a follow-up exploration at any of our clinics."
-                : "Everything looks normal. Don't forget to check regularly at our clinics."}
-            &lt;/Card.Text>
-          &lt;/Card.Body>
-        &lt;/Accordion.Collapse>
-      &lt;/Card>
+      &lt;Layout>
+        &lt;Container>
+          {!this.state.logged_in ? (
+            &lt;Container className="mx-auto my-3 d-flex flex-column">
+            &lt;p className="mx-auto my-5 "> &lt;strong>You are not logged in.&lt;/strong> &lt;/p> 
+              &lt;p className="mx-auto"> To continue click here: &lt;/p> 
+              &lt;div className="mx-auto ">&lt;Button as={Link} variant="light" to="/">Login here&lt;/Button>&lt;/div>
+            &lt;/Container>
+          ) : (
+            &lt;>
+            &lt;Container className="d-flex flex-column mt-3">
+              &lt;p className="mx-auto">Here is the list of all your reports we have on file. To view the results of each report click on its date.&lt;/p>
+            &lt;/Container>
+            &lt;Accordion>
+              {reports.map((report, key) => (
+                &lt;Result
+                  datetime={report.datetime}
+                  result={report.result}
+                  id={key}
+                  key={key}
+                />
+              ))}
+            &lt;/Accordion>
+            &lt;/>
+          )}
+        &lt;/Container>
+      &lt;/Layout>
     )
   }
 }
-export default Result
+
+export default Reports
 </code></pre>
         </article>
     </section>
@@ -137,7 +142,7 @@ export default Result
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Nov 26 2019 18:50:22 GMT-0600 (Central Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Nov 26 2019 20:01:38 GMT-0600 (Central Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>

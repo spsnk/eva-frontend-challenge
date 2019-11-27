@@ -2,6 +2,16 @@ import React from "react"
 import { Link } from "gatsby"
 import { Container, Navbar, Nav } from "react-bootstrap"
 
+/**
+ * Navbar component with not much functionality, only shows logo for now. 
+ * A menu can be aded when theres more to do on this page.
+ * @component
+ * @example
+ * return (
+ *  <Navmenu />
+ * )
+ */
+
 const Navmenu = () => {
   return (
     <Navbar

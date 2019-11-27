@@ -9,7 +9,7 @@
       import ReactDOM from "react-dom";
 
 
-      import ReactWrapper from '../../D:\Programs\cygwin64\home\Nyan\eva\client\node_modules\better-docs/lib/react-wrapper.js';
+      import ReactWrapper from '../node_modules/better-docs/lib/react-wrapper.js';
 
       window.React = React;
 
@@ -22,5 +22,8 @@
 
     import './styles/iframe.css';
 
-  import Component0 from '../../D:\Programs\cygwin64\home\Nyan\eva\client\src\components\result.js';
-reactComponents['Result'] = Component0;
+  import Component0 from '../src/components/login.js';
+reactComponents['LoginForm'] = Component0;
+
+import Component1 from '../src/components/result.js';
+reactComponents['Result'] = Component1;

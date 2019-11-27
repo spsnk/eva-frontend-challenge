@@ -1,8 +1,7 @@
 /**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
+ * Layout component to use as page layout
+ * @function
+ * @param {JSX} children The JSX elements to be contained within the layout
  */
 
 import React from "react"
