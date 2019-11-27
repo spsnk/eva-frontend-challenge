@@ -45,9 +45,11 @@ class Result extends React.Component {
             </Card.Text>
             <Card.Text>
               What this means? <br />
+              <span>
               {this.props.result == "Asymmetric"
                 ? "There is a discrepancy on the density of your tissue, this is normal in most cases and we need more information to give you an accurate result. Please schedule a follow-up exploration at any of our clinics."
                 : "Everything looks normal. Don't forget to check regularly at our clinics."}
+              </span>
             </Card.Text>
           </Card.Body>
         </Accordion.Collapse>

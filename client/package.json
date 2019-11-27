@@ -25,7 +25,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
-    "babel-preset-gatsby": "^0.2.22",
+    "babel-preset-gatsby": "^0.2.23",
     "better-docs": "^1.4.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
@@ -45,7 +45,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "docs": "jsdoc -c ./jsdoc.json",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
